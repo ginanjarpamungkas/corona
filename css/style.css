@@ -8,6 +8,7 @@ body::-webkit-scrollbar:vertical {width:1px;}
 .background {fill: none;pointer-events: all; }
 .feature {fill: #ccc;}
 .feature.active {fill: orange;}
+.feature.active.region {fill: red;}
 .mesh {fill: none;stroke: #fff;stroke-linecap: round;stroke-linejoin: round;}
 #map-container {position: relative;}
 .opening {display: flex;flex-direction: column;justify-content: center;align-items: center;height: 100vh;background-color:#00a650;position: fixed;z-index: 10;}

@@ -8,6 +8,7 @@ var path = d3.geoPath().projection(projection);
 var data = [{label: "◄", x: width-(width-50), y: height / 2 },
     {label: "►", x: width-50 , y: height / 2 }];
 var dataC =[]
+var dataR =[]
 var svg = d3.select("#map-container").append("svg").attr("width", width).attr("height", height).on("click", stopped, true);
     svg.append("rect").attr("class", "background").attr("width", width).attr("height", height).on("click", reset);
 
@@ -25,13 +26,17 @@ d3.json("countryoriginal.json", function(error, world) {
     return d.id
   };}).call(function(d){ for (let ind = 0; ind < 241; ind++) {      
     dataC.push(d._groups[0][ind].__data__)
-  };});
+  };}).attr('name','country');
   g.append("path").datum(topojson.mesh(world, world.objects.countries, function(a, b) { return a !== b; })).attr("class", "mesh").attr("d", path);
   console.log(dataC);
 });
 
 // this to region country
-d3.json("geo-corona.json",function(json) {corona = g_corona.selectAll("path").data(json.features).enter().append("path").attr("d", path).attr("class", "mesh").attr("stroke-width", 0.1).attr('id',function(d){ return d.properties['id']; })})
+d3.json("geo-corona.json",function(json) {corona = g_corona.selectAll("path").data(json.features).enter().append("path").attr("d", path).attr("class", "mesh").attr("stroke-width", 0.1).attr('id',function(d){ return d.properties['id']; }).call(function(d){ for (let ind = 0; ind < 80; ind++) {      
+  dataR.push(d._groups[0][ind].__data__)
+};}).attr('name','region')
+console.log(dataR);
+})
 
 function reset() {
   console.log('reset');
